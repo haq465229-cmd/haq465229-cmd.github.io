@@ -1,0 +1,17 @@
+# Desktop build and local tooling
+node_modules/
+dist/
+build/
+backups/
+source-documents/
+tmp/
+tests/
+tools/
+desktop-main.js
+package.json
+package-lock.json
+启动档案馆.cmd
+
+# The website uses the optimized WebP character portraits.
+assets/characters/*.png
+assets/app-icon.png

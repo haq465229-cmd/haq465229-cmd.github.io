@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>诗人时代的回声 · 远程 Word 编辑器</title>
+  <link rel="stylesheet" href="remote-editor.css">
+</head>
+<body data-mobile-panel="books">
+  <header class="topbar">
+    <div class="brand">
+      <strong>远程 Word 编辑器</strong>
+      <span>Echoes of a Poetic Age</span>
+    </div>
+    <div class="connection">
+      <input id="tokenInput" type="password" autocomplete="off" placeholder="远程保存口令">
+      <button id="connectButton" type="button">重新连接</button>
+      <span id="status" class="status">正在连接编辑服务...</span>
+    </div>
+    <div class="actions">
+      <button id="reloadButton" type="button">放弃修改并刷新</button>
+      <button id="saveButton" class="primary" type="button" disabled>保存到远程</button>
+    </div>
+  </header>
+
+  <nav class="mobile-switcher" aria-label="移动端编辑区域">
+    <button type="button" data-panel="books">书卷</button>
+    <button type="button" data-panel="chapters">章节</button>
+    <button type="button" data-panel="editor">编辑</button>
+  </nav>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-head">
+        <p>十二卷</p>
+        <input id="bookSearch" type="search" placeholder="搜索书名">
+      </div>
+      <div id="bookList" class="book-list"></div>
+    </aside>
+
+    <aside class="chapters">
+      <div class="chapters-head">
+        <p>章节目录</p>
+        <button id="addChapterButton" type="button">新增章节</button>
+      </div>
+      <div id="chapterList" class="chapter-list"></div>
+    </aside>
+
+    <main>
+      <div id="emptyState" class="empty">选择一本书和一个章节后即可直接编辑文字。</div>
+      <form id="editorForm" hidden>
+        <div class="editor-header">
+          <div>
+            <small id="volumeNumber"></small>
+            <h1 id="editorHeading"></h1>
+          </div>
+          <span id="dirtyMark" class="dirty-mark"></span>
+        </div>
+
+        <fieldset>
+          <legend>书卷信息</legend>
+          <div class="grid">
+            <label><span>中文书名</span><input id="bookTitle" data-book-field="title"></label>
+            <label><span>英文书名</span><input id="bookEnglish" data-book-field="english"></label>
+            <label><span>色调</span><input id="bookTone" data-book-field="tone"></label>
+            <label class="wide"><span>书卷简介</span><textarea id="bookSummary" data-book-field="summary"></textarea></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="document-fieldset">
+          <legend>章节正文</legend>
+          <div class="grid chapter-meta">
+            <label><span>章节标题</span><input id="chapterTitle" data-chapter-field="title"></label>
+            <label><span>章节副标题</span><input id="chapterSubtitle" data-chapter-field="subtitle"></label>
+          </div>
+
+          <div id="wordToolbar" class="word-toolbar" role="toolbar" aria-label="正文格式工具栏">
+            <div class="tool-group">
+              <button type="button" data-command="undo" title="撤销 (Ctrl+Z)">↶</button>
+              <button type="button" data-command="redo" title="重做 (Ctrl+Y)">↷</button>
+            </div>
+            <div class="tool-group tool-selects">
+              <select id="blockFormat" title="段落样式">
+                <option value="p">正文</option>
+                <option value="h2">标题 1</option>
+                <option value="h3">标题 2</option>
+                <option value="h4">标题 3</option>
+                <option value="blockquote">引用</option>
+              </select>
+              <select id="fontName" title="字体">
+                <option value="Noto Serif SC">思源宋体</option>
+                <option value="Songti SC">宋体</option>
+                <option value="SimSun">中易宋体</option>
+                <option value="Microsoft YaHei">微软雅黑</option>
+                <option value="SimHei">黑体</option>
+                <option value="KaiTi">楷体</option>
+                <option value="STKaiti">华文楷体</option>
+                <option value="FangSong">仿宋</option>
+                <option value="STFangsong">华文仿宋</option>
+                <option value="LiSu">隶书</option>
+                <option value="YouYuan">幼圆</option>
+                <option value="Arial">Arial</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="__custom__">自定义字体…</option>
+              </select>
+              <select id="fontSize" title="字号">
+                <option value=".65">小五</option>
+                <option value=".8">小四</option>
+                <option value="1" selected>正文</option>
+                <option value="1.2">小三</option>
+                <option value="1.45">二号</option>
+                <option value="1.8">小一</option>
+                <option value="2.2">大标题</option>
+                <option value="3">特大标题</option>
+                <option value="__custom__">自定义字号…</option>
+              </select>
+            </div>
+            <div class="tool-group">
+              <button type="button" data-command="bold" title="加粗 (Ctrl+B)"><b>B</b></button>
+              <button type="button" data-command="italic" title="斜体 (Ctrl+I)"><i>I</i></button>
+              <button type="button" data-command="underline" title="下划线 (Ctrl+U)"><u>U</u></button>
+              <button type="button" data-command="strikeThrough" title="删除线"><s>S</s></button>
+              <button type="button" data-command="superscript" title="上标">X²</button>
+              <button type="button" data-command="subscript" title="下标">X₂</button>
+            </div>
+            <div class="tool-group color-tools">
+              <label title="文字颜色">A<input id="textColor" type="color" value="#2f261c"></label>
+              <label title="高亮颜色">▰<input id="highlightColor" type="color" value="#eadb8c"></label>
+            </div>
+            <div class="tool-group">
+              <button type="button" data-command="justifyLeft" title="左对齐">左</button>
+              <button type="button" data-command="justifyCenter" title="居中">中</button>
+              <button type="button" data-command="justifyRight" title="右对齐">右</button>
+              <button type="button" data-command="justifyFull" title="两端对齐">齐</button>
+            </div>
+            <div class="tool-group">
+              <button type="button" data-command="insertUnorderedList" title="项目符号">• 列表</button>
+              <button type="button" data-command="insertOrderedList" title="编号列表">1. 列表</button>
+              <button type="button" data-command="outdent" title="减少缩进">←</button>
+              <button type="button" data-command="indent" title="增加缩进">→</button>
+            </div>
+            <div class="tool-group">
+              <button id="linkButton" type="button" title="添加链接">链接</button>
+              <button type="button" data-command="unlink" title="取消链接">取消链接</button>
+              <button id="imageButton" type="button" title="插入图片">图片</button>
+              <input id="imageInput" type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+              <button id="tableButton" type="button" title="插入表格">表格</button>
+              <button id="dividerButton" type="button" title="插入分隔线">分隔线</button>
+            </div>
+            <div class="tool-group">
+              <button type="button" data-command="removeFormat" title="清除文字格式">清除格式</button>
+            </div>
+          </div>
+
+          <div class="document-shell">
+            <div id="chapterBody" class="word-document" contenteditable="true" spellcheck="true" aria-label="章节正文"></div>
+          </div>
+          <p class="hint">支持字体、字号、标题、粗体、斜体、下划线、删除线、颜色、高亮、上下标、对齐、列表、缩进、链接、图片、表格、分隔线、撤销与重做。图片保存时会自动写入项目。</p>
+        </fieldset>
+      </form>
+    </main>
+  </div>
+
+  <script src="remote-editor.js"></script>
+</body>
+</html>

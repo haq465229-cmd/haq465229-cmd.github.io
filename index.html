@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-content-protection>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#11150f">
+  <meta name="description" content="Echoes of a Poetic Age - 诗人时代的回声">
+  <title>Echoes of a Poetic Age</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (() => {
+      document.documentElement.classList.add("intro-enabled");
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css?v=20260624-local-sync-2">
+</head>
+<body>
+  <section class="intro-screen" id="introScreen" role="dialog" aria-modal="true" aria-labelledby="introTitle" aria-describedby="introStatus">
+    <div class="intro-frame" aria-hidden="true"></div>
+    <div class="intro-content">
+      <p class="intro-kicker">THE FIRST LEAF OF THE ARCHIVE</p>
+      <h1 id="introTitle">Echoes of a Poetic Age</h1>
+      <div class="intro-ornament" aria-hidden="true"><span></span><i></i><span></span></div>
+
+      <div class="intro-course" id="introCourse" aria-hidden="true">
+        <div class="intro-track">
+          <span class="intro-progress-fill"></span>
+        </div>
+        <div class="intro-rider"></div>
+      </div>
+
+      <div class="intro-status-row">
+        <span id="introStatus" role="status" aria-live="polite">Opening the first leaf...</span>
+        <strong id="introPercent">0%</strong>
+      </div>
+
+      <div class="intro-mode-choices" id="introModeChoices" aria-label="选择网站展示方式">
+        <button class="intro-mode-choice" type="button" data-display-mode="book" disabled>
+          <strong>翻页书籍版</strong>
+          <span>双页展开、纸张翻页与键盘翻阅</span>
+        </button>
+        <button class="intro-mode-choice" type="button" data-display-mode="classic" disabled>
+          <strong>经典页面版</strong>
+          <span>使用原始纵向网页布局浏览</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="ambient-light" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cinematic-dust" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header class="site-header">
+    <button class="brand nav-trigger" data-view="home" aria-label="返回首页">
+      <span>Echoes of a Poetic Age</span>
+      <i></i>
+    </button>
+    <button class="menu-toggle" id="menuToggle" aria-label="打开导航" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="main-nav" id="mainNav" aria-label="主导航">
+      <button class="nav-trigger active" data-view="home">首页</button>
+      <button class="nav-trigger" data-view="letter">写在前面的话</button>
+      <button class="nav-trigger" data-view="map">地图</button>
+      <button class="nav-trigger" data-view="characters">人物</button>
+      <button class="nav-trigger" data-view="gallery">美术馆</button>
+      <button class="nav-trigger" data-view="archive">吟游诗人的见闻</button>
+      <button class="nav-trigger" data-view="settings">设置</button>
+    </nav>
+    <div class="header-rule" aria-hidden="true"><span></span></div>
+  </header>
+
+  <main>
+    <section class="view hero-view active" id="homeView" data-view-name="home">
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="eyebrow">An Archive Beyond The Last Song</p>
+        <h1>
+          <img class="hero-title-wordmark" src="assets/hero-title-wordmark.png" width="1693" height="929" alt="" aria-hidden="true">
+          <span class="hero-title-text">Echoes of a Poetic Age</span>
+        </h1>
+        <h2>诗人时代的回声</h2>
+        <p class="hero-lead">A world of legends, memory, and unfinished songs.</p>
+        <button class="ornate-button nav-trigger" data-view="archive">
+          <span>进入档案馆</span>
+        </button>
+      </div>
+      <div class="hero-index">
+        <span>卷宗</span>
+        <strong>十二</strong>
+        <em>12 VOLUMES</em>
+      </div>
+    </section>
+
+    <section class="view content-view" id="letterView" data-view-name="letter">
+      <div class="section-hero compact">
+        <div>
+          <p class="eyebrow">Words Before The Archive</p>
+          <h1>写在前面的话</h1>
+          <p>泰勒·斯通为《诗人时代的回声》所作序文。</p>
+        </div>
+      </div>
+      <div class="parchment-wrap">
+        <article class="letter-paper preface-paper">
+          <span class="dropcap">我</span>
+          <p>受坦恩商会的委托，为这部《诗人时代的回声》作序。坦白说，这份委托让我辗转难眠了好几夜。不是因为它不够重要——恰恰相反，我担心自己配不上它。</p>
+          <p>这部书稿从高塔地亲王提耶利亚·海塔尔最初的《河西编年史》手稿开始，历经灰塔城、白塔学院、青雀学院、坦恩商会四代学者接力编纂，前后跨越超三百余年。它最初只是一份记录奥里倪图斯家族崛起的战争笔记，后来被不断增补、修订、扩充，最终变成了您现在看到的这副模样——一部关于忒诺亚、关于已知世界、关于我们所有人的庞杂记忆。</p>
+          <p>我必须事先提醒您：这不是一本“好读”的书。</p>
+          <p>它没有一条贯穿始终的故事线，没有始终陪伴读者的主角，甚至没有一个明确的开头与结尾。它更像是一座堆满藏品的博物馆——神话、历史、地理、民俗、宗教、战争、政治、人物传记，全部挤在一起，彼此碰撞，彼此映照。您会读到“灼目王”泰利昂东渡的史诗，翻过几页又撞见翠月陨落的挽歌；刚沉浸在河西统一战争的铁与血中，转眼又被拉进香料地铎尔祭典的圣香烟雾里。它的编纂者们似乎从未打算替读者梳理出一条平坦的道路。他们只是把自己认为重要的东西，一件一件地摆出来，然后退后一步，沉默地看着您。</p>
+          <p>但这恰恰是它的价值所在。</p>
+          <p>真实的历史从来不是一条清澈的河流。它浑浊、蜿蜒、充满岔道与暗涌。我们在青雀学院的回廊里争论了数百年，究竟该如何讲述忒诺亚的过去——是按编年？按地域？按王朝谱系？还是按神祇的意志？每一种选择都意味着对其他可能的遮蔽。而这部书稿的编纂者们，似乎故意放弃了选择。他们让河西文字与北方符文并肩而立，让帝国的凯旋颂歌与巴洛卢瑟的流亡哀歌在同一卷中回响，让游吟诗人的华丽辞藻紧挨着大学士的冰冷考据。</p>
+          <p>这就是我们的世界。吵闹的、矛盾的、永远无法被单一声音概括的世界。</p>
+          <p>作为学者，我必须向您坦白这部书稿的诸多“瑕疵”。关于太古时代的记载，大半来自口述传统与游吟诗人的歌谣，其可信度堪比用筛子打水。翠月神话的部分，编纂者明显偏爱那些戏剧性的叙事——萨诺斯的痴恋、卡伦威的癫火、艾尔芙的悲悯——而正统精灵学者对此嗤之以鼻，认为这些不过是人类对精灵历史的庸俗化改编。关于香料地、巴洛卢瑟、文兰等远方大陆的记载，虽然详尽得令人惊叹，但您要知道，其中许多信息来自商人与航海者的二手乃至三手转述，隔着语言的迷雾、利益的扭曲、以及漫长时间中不可避免的以讹传讹。</p>
+          <p>即便是帝国本土的记载，也并非全然可靠。提耶利亚·海塔尔本人就是奥里倪图斯家族的亲王，他笔下的九王之战与河西统一，天然带有胜利者的视角。那些被征服者的声音——高塔地的霍恩家族、金草原的皮佩恩家族、山下部族的无名氏——他们如何讲述同一段历史？我们永远不会知道了。</p>
+          <p>但我仍然认为，这部书稿值得您花时间阅读。</p>
+          <p>不是因为它给出了答案，而是因为它诚实地呈现了问题。它让您看见，历史是如何被书写的——被谁书写，为谁书写，又遗漏了谁。它让您看见，神话与史实之间的界线有多模糊，信仰与权力之间的纠缠有多紧密，繁荣与衰亡之间的转换有多突然。</p>
+          <p>更重要的是，它让您看见这片土地上的人们——从太古时代在母牛希弗的眼泪中涌现的第一批凡人，到第一纪元在黑城阴影下挣扎求生的七戒持有者，再到第二纪元在帝国的铁蹄与王冠之间奔波的无数无名者。他们脆弱，短暂，充满缺陷。但他们也建造了白城与雄月城，开辟了黄金之路与白银之路，在翠月的废墟上重建家园，在帝国的裂痕中守护着微弱的火种。</p>
+          <p>这部书稿中最打动我的，反而不是那些宏大的史诗，而是一些几乎被淹没在宏大叙事中的细节。《翡翠游侠录》第七卷的著者，那位七戒持有者之一，在记录完七人将戒指投入深坑、终结萨诺斯残魂的壮举之后，写了这样一段话：</p>
+          <blockquote class="preface-quote">
+            <p>“我......我也不知道我在写什么。可能只是想留个记号。告诉后来的某个人——我们真的来过这里。”</p>
+          </blockquote>
+          <p>我们真的来过这里。</p>
+          <p>这就是全部的意义，不是吗？所有这些文字，所有这些被记录的名字与事件，所有这些被争论、被质疑、被遗忘又被重新发现的记忆——归根结底，只是一群脆弱而短暂的凡人，试图告诉后来者：我们在这里活过，爱过，战斗过，失败过，也偶尔胜利过。请不要忘记我们。</p>
+          <p>游吟诗人拜尔德在卷首的题词中写道：愿您在此找到属于自己的英雄篇章。我想，这期待或许太高了。不是每个人都需要成为英雄。但每个人都可以在这部书稿中找到某种回声——某个与自己相似的人，某段与自己共鸣的命运，某片与自己故乡相似的土地。在这片被称作忒诺亚的广袤世界中，我们从来不是孤身一人。</p>
+          <p>最后，请允许我以编纂者之一的身份，说一句私人的话。</p>
+          <p>我在这部书稿上花费了十七年。十七年间，我核对过每一个我能找到的地名，考证过每一处我能触及的史料，在无数个深夜里与那些早已逝去的名字对话。但我仍然不敢说自己真正理解了这片土地。忒诺亚太大了，大到任何一个个体都无法穷尽。它的每一个角落都藏着另一个故事，每一段故事的背后都站着另一个讲述者。</p>
+          <p>这部书稿远未完成。它永远不可能完成。因为只要还有人在这片土地上生活、战斗、相爱、死去，新的篇章就仍在书写。我所做的，只是在无尽的河流中截取一段，在它还清澈的时候，捧到您的面前。</p>
+          <p>请读吧。请质疑。请记住。</p>
+          <footer class="preface-signature">
+            <strong>泰勒·斯通</strong>
+            <span>坦恩商会地理与历史学首席学者</span>
+            <span>《诗人时代的回声》编者、《癫火》与《大远征·混乱时代的终结》作者</span>
+            <span>河西历 1027 年，于火红女士港</span>
+          </footer>
+        </article>
+      </div>
+    </section>
+
+    <section class="view content-view" id="mapView" data-view-name="map">
+      <div class="section-hero compact">
+        <div>
+          <p class="eyebrow">The Atlas of Known Lands</p>
+          <h1>地图</h1>
+          <p>地理、画卷与国度</p>
+        </div>
+      </div>
+      <div class="atlas-shell">
+        <aside class="atlas-index">
+          <p class="eyebrow">Atlas Index</p>
+          <h2>已收录地图</h2>
+          <p>点击名称切换地图。后续新增图片时，图册会继续按顺序扩展。</p>
+          <nav id="atlasList" aria-label="地图图册目录"></nav>
+        </aside>
+        <section class="atlas-viewer" aria-live="polite">
+          <div class="atlas-toolbar">
+            <button id="prevMap" type="button">← 上一张</button>
+            <span id="atlasCounter">01 / 05</span>
+            <button id="nextMap" type="button">下一张 →</button>
+          </div>
+          <figure class="atlas-plate">
+            <button class="atlas-zoom" id="openMapLightbox" type="button">放大查看</button>
+            <img id="atlasImage" src="" alt="">
+            <figcaption>
+              <small id="atlasEnglish"></small>
+              <strong id="atlasTitle"></strong>
+              <span id="atlasNote"></span>
+            </figcaption>
+          </figure>
+        </section>
+      </div>
+      <dialog class="map-lightbox" id="mapLightbox">
+        <div class="lightbox-frame">
+          <button id="closeMapLightbox" type="button" aria-label="关闭地图预览">关闭</button>
+          <img id="lightboxMapImage" src="" alt="">
+          <p id="lightboxMapTitle"></p>
+        </div>
+      </dialog>
+    </section>
+
+    <section class="view content-view" id="charactersView" data-view-name="characters">
+      <div class="section-hero compact">
+        <div>
+          <p class="eyebrow">The Archive of Names</p>
+          <h1>人物</h1>
+          <p>曾经存在过的人。</p>
+        </div>
+      </div>
+      <div class="character-archive">
+        <div class="character-toolbar">
+          <div>
+            <span id="characterCount">0 CHARACTERS</span>
+            <p>人物将按照加入图鉴的顺序陈列。</p>
+          </div>
+          <label class="character-search">
+            <span>搜索人物</span>
+            <input id="characterSearch" type="search" placeholder="输入姓名或简介关键词">
+          </label>
+        </div>
+
+        <form class="character-developer-panel" id="characterForm">
+          <div class="developer-panel-title">
+            <div>
+              <p class="eyebrow">Developer Mode</p>
+              <h2>添加人物</h2>
+            </div>
+            <div class="developer-panel-tools">
+              <span id="characterFormMode">新增内容保存在当前浏览器本地。</span>
+              <button id="exportCharactersButton" type="button">导出人物数据</button>
+            </div>
+          </div>
+          <div class="character-form-fields">
+            <label class="portrait-upload">
+              <input id="characterImageInput" type="file" accept="image/*" required>
+              <span id="portraitUploadLabel">选择人物图片<br><small>建议使用 4:5 比例</small></span>
+              <img id="portraitPreview" alt="人物图片预览">
+            </label>
+            <div class="character-text-fields">
+              <label>人物姓名<input id="characterNameInput" type="text" maxlength="60" required placeholder="例如：泰勒·斯通"></label>
+              <label>人物简介<textarea id="characterIntroInput" maxlength="320" required placeholder="用一小段文字介绍这个人物"></textarea></label>
+              <div class="character-form-actions">
+                <button id="characterSubmitButton" type="submit">添加到人物图鉴</button>
+                <button id="characterCancelEdit" type="button">取消编辑</button>
+              </div>
+              <p id="characterFormStatus" role="status"></p>
+            </div>
+          </div>
+        </form>
+
+        <div class="character-gallery" id="characterGallery"></div>
+        <div class="character-empty" id="characterEmpty">
+          <strong>没有找到人物</strong>
+          <p>尝试更换搜索关键词，或在开发者模式中添加人物。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="view content-view" id="galleryView" data-view-name="gallery">
+      <div class="section-hero compact">
+        <div>
+          <p class="eyebrow">The Gallery of Memory</p>
+          <h1>美术馆</h1>
+          <p>可被凝视的记忆。</p>
+        </div>
+      </div>
+      <div class="gallery-archive">
+        <div class="gallery-category-tabs" id="galleryCategoryTabs" aria-label="美术馆分类">
+          <button class="active" data-gallery-category="chronicle" type="button">
+            <span>编年史</span><small id="galleryCountChronicle">0</small>
+          </button>
+          <button data-gallery-category="land" type="button">
+            <span>土地</span><small id="galleryCountLand">0</small>
+          </button>
+          <button data-gallery-category="myth" type="button">
+            <span>神话</span><small id="galleryCountMyth">0</small>
+          </button>
+        </div>
+
+        <section class="gallery-developer-panel" id="galleryDeveloperPanel">
+          <div class="gallery-developer-heading">
+            <div>
+              <p class="eyebrow">Developer Mode</p>
+              <h2>管理美术馆</h2>
+            </div>
+            <div class="gallery-publish-actions">
+              <button id="discardGalleryDraft" type="button" disabled>放弃修改</button>
+              <button id="publishGalleryDraft" type="button" disabled>保存到项目</button>
+            </div>
+          </div>
+          <div class="gallery-upload-row">
+            <label>
+              <span>上传到分类</span>
+              <select id="galleryUploadCategory">
+                <option value="chronicle">编年史</option>
+                <option value="land">土地</option>
+                <option value="myth">神话</option>
+              </select>
+            </label>
+            <label class="gallery-upload-button">
+              <input id="galleryUploadInput" type="file" accept="image/png,image/jpeg,image/webp,image/gif" multiple>
+              <span>选择画作图片</span>
+            </label>
+            <p id="galleryConnectionStatus">正在检测本地发布服务…</p>
+            <button id="refreshGalleryConnection" type="button">重新检测连接</button>
+          </div>
+          <p class="gallery-developer-help">可直接改名、移动分类或删除；拖动画作调整当前分类顺序。所有操作仅在点击“保存到项目”后生效。</p>
+          <p id="galleryDraftStatus" role="status"></p>
+        </section>
+
+        <div class="gallery-grid" id="galleryGrid"></div>
+        <div class="gallery-empty" id="galleryEmpty">
+          <strong>这个展厅尚未收录画作</strong>
+          <p>开发者模式下可以向当前分类上传新的图片。</p>
+        </div>
+      </div>
+
+      <dialog class="gallery-lightbox" id="galleryLightbox">
+        <div class="gallery-lightbox-frame">
+          <div class="gallery-lightbox-toolbar">
+            <button id="closeGalleryLightbox" type="button" aria-label="关闭画作预览">关闭</button>
+            <span id="galleryLightboxCounter"></span>
+          </div>
+          <button class="gallery-lightbox-nav previous" id="previousGalleryArtwork" type="button" aria-label="上一张画作">←</button>
+          <img id="galleryLightboxImage" src="" alt="">
+          <button class="gallery-lightbox-nav next" id="nextGalleryArtwork" type="button" aria-label="下一张画作">→</button>
+          <p id="galleryLightboxTitle"></p>
+        </div>
+      </dialog>
+    </section>
+
+    <section class="view archive-view" id="archiveView" data-view-name="archive">
+      <div class="archive-intro">
+        <div>
+          <p class="eyebrow">The Minstrel's Observations</p>
+          <h1>吟游诗人的见闻</h1>
+          <p>旅行、传说与被记住的土地。十二卷故事，从声音流向声音。</p>
+        </div>
+        <div class="volume-count"><strong>12</strong><span>VOLUMES</span></div>
+      </div>
+      <div class="archive-frame">
+        <div class="corner corner-tl"></div><div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div><div class="corner corner-br"></div>
+        <div class="book-grid" id="bookGrid"></div>
+      </div>
+      <section class="book-workbench" id="bookWorkbench">
+        <div class="workbench-title">
+          <div>
+            <p class="eyebrow">Local Book Workbench</p>
+            <h2>本地书籍工作台</h2>
+            <p>Word 导入、草稿编辑与项目发布全部在你的电脑上完成，不调用 AI。</p>
+          </div>
+          <label class="word-import-button">
+            <input id="wordFileInput" type="file" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+            <span>导入整套 DOCX</span>
+          </label>
+        </div>
+        <p class="workbench-status" id="bookWorkbenchStatus" role="status">选择 DOCX 后，将先显示分卷与章节映射预览。</p>
+        <div id="wordImportPreview"></div>
+        <div class="draft-manager">
+          <div class="draft-manager-heading">
+            <div><h3>十二卷本地状态</h3><span id="draftCount">0 卷未发布</span></div>
+            <button id="publishBooksButton" type="button" disabled>保存到项目文件</button>
+          </div>
+          <p id="publishConnectionStatus">正在检测本地发布服务…</p>
+          <div id="bookDraftList"></div>
+        </div>
+      </section>
+    </section>
+
+    <section class="view content-view" id="settingsView" data-view-name="settings">
+      <div class="section-hero compact">
+        <div>
+          <p class="eyebrow">The Reader's Desk</p>
+          <h1>阅读设置</h1>
+          <p>让档案馆更接近你习惯的样子。</p>
+        </div>
+      </div>
+      <div class="settings-panel">
+        <div class="setting-row">
+          <div><h2>文字大小</h2><p>仅影响书卷阅读页面。</p></div>
+          <div class="segmented" id="fontControls">
+            <button data-size="small">小</button><button class="active" data-size="medium">中</button><button data-size="large">大</button>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div><h2>环境光晕</h2><p>保留烛光般的金色呼吸效果。</p></div>
+          <label class="switch"><input id="ambientToggle" type="checkbox" checked><span></span></label>
+        </div>
+        <div class="setting-row">
+          <div><h2>沉浸阅读</h2><p>阅读时隐藏顶部导航。</p></div>
+          <label class="switch"><input id="focusToggle" type="checkbox"><span></span></label>
+        </div>
+        <div class="setting-row music-setting-row">
+          <div><h2>音乐</h2><p id="musicStatus" aria-live="polite">选择一首背景音乐。</p></div>
+          <div class="music-controls">
+            <label class="music-select">
+              <span>曲目</span>
+              <select id="musicTrackSelect" aria-label="选择背景音乐">
+                <option value="wings">Wings in his Eyes · Eleni Mandell</option>
+                <option value="siren" selected>Song to the Siren · Rose Betts</option>
+              </select>
+            </label>
+            <label class="switch" title="播放或暂停音乐"><input id="musicToggle" type="checkbox" aria-label="播放或暂停音乐" checked><span></span></label>
+          </div>
+          <audio id="backgroundMusic" preload="metadata" loop></audio>
+        </div>
+        <div class="setting-row">
+          <div><h2>翻页音效</h2><p>仅在书籍模式真实翻页时播放轻柔纸张声。</p></div>
+          <label class="switch"><input id="pageSoundToggle" type="checkbox" aria-label="开启或关闭翻页音效" checked><span></span></label>
+          <audio id="pageTurnSound" src="assets/sounds/page-turn.wav" preload="auto"></audio>
+        </div>
+        <div class="setting-row">
+          <div><h2>开发者模式</h2><p>开启后，可以管理人物、书籍内容与美术馆画作。</p></div>
+          <label class="switch"><input id="developerToggle" type="checkbox"><span></span></label>
+        </div>
+      </div>
+    </section>
+
+    <section class="view reader-view" id="readerView" data-view-name="reader">
+      <div class="reader-top">
+        <button class="back-button" id="readerBack">← 返回十二卷</button>
+        <div class="reader-progress"><span id="readerProgress"></span></div>
+        <span id="readerVolumeLabel">VOLUME I</span>
+      </div>
+      <div class="reader-layout">
+        <aside class="reader-sidebar">
+          <div class="mini-cover"><img id="readerCover" alt=""></div>
+          <p>TABLE OF CONTENTS</p>
+          <h2 id="readerSideTitle"></h2>
+          <nav id="chapterList" aria-label="章节目录"></nav>
+        </aside>
+        <article class="reader-paper">
+          <div class="chapter-editor-bar">
+            <button id="editChapterButton" type="button">编辑本章</button>
+            <span id="chapterEditorStatus">开发者模式下可直接编辑本章。</span>
+          </div>
+          <div class="chapter-editor-toolbar" id="chapterEditorToolbar" hidden>
+            <button type="button" data-command="formatBlock" data-value="p">正文</button>
+            <button type="button" data-command="formatBlock" data-value="h3">三级标题</button>
+            <button type="button" data-command="formatBlock" data-value="h4">小标题</button>
+            <button type="button" data-command="formatBlock" data-value="blockquote">引用</button>
+            <button type="button" data-command="insertUnorderedList">项目列表</button>
+            <button type="button" data-command="insertOrderedList">编号列表</button>
+            <button type="button" data-command="bold"><strong>B</strong></button>
+            <button type="button" data-command="italic"><em>I</em></button>
+            <button type="button" data-command="underline"><u>U</u></button>
+            <button type="button" data-command="justifyLeft">左对齐</button>
+            <button type="button" data-command="justifyCenter">居中</button>
+            <button type="button" data-command="justifyRight">右对齐</button>
+            <button type="button" data-command="justifyFull">两端对齐</button>
+          </div>
+          <header>
+            <span id="chapterKicker"></span>
+            <h1 id="chapterTitle"></h1>
+            <p id="chapterSubtitle"></p>
+          </header>
+          <div class="chapter-body" id="chapterBody"></div>
+          <div class="reader-actions">
+            <button id="prevChapter">← 上一章</button>
+            <span>✦</span>
+            <button id="nextChapter">下一章 →</button>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span></span><p>STORIES END. ECHOES REMAIN.</p><span></span>
+  </footer>
+
+  <script src="content-protection.js?v=20260624-local-sync-2"></script>
+  <script src="books.js?v=20260624-local-sync-2"></script>
+  <script src="maps.js?v=20260624-local-sync-2"></script>
+  <script src="characters.js?v=20260624-local-sync-2"></script>
+  <script src="gallery.js?v=20260624-local-sync-2"></script>
+  <script src="vendor/jszip.min.js"></script>
+  <script src="word-importer.js?v=20260624-local-sync-2"></script>
+  <script src="book-workbench.js?v=20260624-local-sync-2"></script>
+  <script src="app.js?v=20260624-local-sync-2"></script>
+  <script src="gallery-workbench.js?v=20260624-local-sync-2"></script>
+  <script src="vendor/stpageflip/page-flip.browser.js"></script>
+  <script src="site-book.js?v=20260624-local-sync-2"></script>
+</body>
+</html>
