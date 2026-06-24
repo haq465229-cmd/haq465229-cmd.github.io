@@ -456,8 +456,16 @@ function isSyntheticChapter(chapter) {
   return Boolean(chapter?.synthetic);
 }
 
+function readerDisplayLevel(level) {
+  return Math.min(4, Math.max(1, Number(level) || 1));
+}
+
 function readerTocLevel(block) {
-  return Math.min(5, blockHeadingLevel(block));
+  return readerDisplayLevel(blockHeadingLevel(block));
+}
+
+function readerHeadingTagLevel(block) {
+  return readerDisplayLevel(blockHeadingLevel(block));
 }
 
 function blockHeadingLevel(block) {
@@ -514,6 +522,7 @@ function readerTocItems(book) {
   const items = [{
     type: "book",
     level: 1,
+    outlineLevel: 1,
     chapterIndex: 0,
     tocId: readerBookTocId(),
     title: book?.title || "",
@@ -525,6 +534,7 @@ function readerTocItems(book) {
       items.push({
         type: "chapter",
         level: 2,
+        outlineLevel: 2,
         chapterIndex,
         tocId: readerChapterTocId(chapterIndex),
         title: chapter.title,
@@ -538,6 +548,7 @@ function readerTocItems(book) {
       items.push({
         type: "heading",
         level: readerTocLevel(block),
+        outlineLevel: blockHeadingLevel(block),
         chapterIndex,
         tocId: readerHeadingId(chapterIndex, blockIndex),
         headingId: readerHeadingId(chapterIndex, blockIndex),
@@ -553,8 +564,10 @@ function readerTocItems(book) {
 function tocItemControlsContent(items, itemIndex) {
   const item = items[itemIndex];
   if (!item) return false;
+  const itemLevel = Number(item.outlineLevel) || Number(item.level) || 1;
   for (let index = itemIndex + 1; index < items.length; index += 1) {
-    if (items[index].level <= item.level) return false;
+    const nextLevel = Number(items[index].outlineLevel) || Number(items[index].level) || 1;
+    if (nextLevel <= itemLevel) return false;
     return true;
   }
   return false;
@@ -568,7 +581,8 @@ function isReaderTocItemExpanded(item) {
 function applyReaderTocFoldState(items) {
   const collapsedStack = [];
   return items.map((item, index) => {
-    while (collapsedStack.length && collapsedStack[collapsedStack.length - 1] >= item.level) collapsedStack.pop();
+    const outlineLevel = Number(item.outlineLevel) || Number(item.level) || 1;
+    while (collapsedStack.length && collapsedStack[collapsedStack.length - 1] >= outlineLevel) collapsedStack.pop();
     const canFold = tocItemControlsContent(items, index);
     const collapsed = canFold && !isReaderTocItemExpanded(item);
     const nextItem = {
@@ -577,7 +591,7 @@ function applyReaderTocFoldState(items) {
       collapsed,
       hiddenByTocFold: collapsedStack.length > 0
     };
-    if (collapsed) collapsedStack.push(item.level);
+    if (collapsed) collapsedStack.push(outlineLevel);
     return nextItem;
   });
 }
@@ -621,6 +635,7 @@ function renderChapterBlocks(chapter, chapterIndex = currentChapter) {
     }
     if (isReaderHeadingBlock(block)) {
       const hLevel = blockHeadingLevel(block);
+      const tagLevel = readerHeadingTagLevel(block);
       const levelClass = hLevel >= 5 ? "chapter-minor-heading" : "chapter-subheading";
       const headingId = readerHeadingId(chapterIndex, blockIndex);
       const canFold = headingControlsContent(blocks, blockIndex, hLevel);
@@ -628,7 +643,7 @@ function renderChapterBlocks(chapter, chapterIndex = currentChapter) {
       const foldClass = canFold ? ` chapter-fold-heading${isCollapsed ? " is-collapsed" : ""}` : "";
       const foldLabel = isCollapsed ? "展开本节" : "折叠本节";
       const foldButton = canFold ? `<button class="chapter-fold-toggle" type="button" data-heading-id="${headingId}" aria-label="${foldLabel}" title="${foldLabel}" aria-expanded="${String(!isCollapsed)}"></button>` : "";
-      return `<h${hLevel} id="${headingId}" class="${levelClass}${foldClass}" data-reader-heading-id="${headingId}" data-reader-heading-level="${hLevel}"${alignment}>${foldButton}<span class="chapter-heading-text">${renderRichRuns(block.runs, block.text)}</span></h${hLevel}>`;
+      return `<h${tagLevel} id="${headingId}" class="${levelClass}${foldClass}" data-reader-heading-id="${headingId}" data-reader-heading-level="${hLevel}" data-reader-heading-display-level="${tagLevel}"${alignment}>${foldButton}<span class="chapter-heading-text">${renderRichRuns(block.runs, block.text)}</span></h${tagLevel}>`;
     }
     if (block.type === "quote") {
       return `<blockquote${alignment}>${renderRichRuns(block.runs, block.text)}</blockquote>`;
@@ -724,8 +739,9 @@ function renderReaderToc() {
     const foldControl = item.canFold
       ? `<button class="toc-fold-toggle" type="button" data-toc-id="${escapeHtml(item.tocId)}"${item.headingId ? ` data-heading-id="${escapeHtml(item.headingId)}"` : ""} aria-label="${foldLabel}" title="${foldLabel}" aria-expanded="${String(!item.collapsed)}"></button>`
       : '<span class="toc-fold-spacer" aria-hidden="true"></span>';
+    const outlineLevel = Number(item.outlineLevel) || Number(item.level) || 1;
     return `
-      <div class="toc-item toc-level-${item.level}${isActive ? " active" : ""}${item.canFold ? " has-toc-children" : ""}${item.collapsed ? " is-collapsed" : ""}${item.hiddenByTocFold ? " is-hidden-by-toc-fold" : ""}" data-toc-id="${escapeHtml(item.tocId)}"${item.hiddenByTocFold ? " hidden" : ""}>
+      <div class="toc-item toc-level-${item.level} toc-outline-level-${outlineLevel}${isActive ? " active" : ""}${item.canFold ? " has-toc-children" : ""}${item.collapsed ? " is-collapsed" : ""}${item.hiddenByTocFold ? " is-hidden-by-toc-fold" : ""}" data-toc-id="${escapeHtml(item.tocId)}" data-outline-level="${outlineLevel}"${item.hiddenByTocFold ? " hidden" : ""}>
         ${foldControl}
         <button class="toc-link" data-chapter="${item.chapterIndex}"${item.headingId ? ` data-heading-id="${escapeHtml(item.headingId)}"` : ""} type="button">
           <span class="toc-marker">${escapeHtml(item.marker)}</span><span class="toc-label">${escapeHtml(item.title)}</span>
