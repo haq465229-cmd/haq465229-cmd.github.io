@@ -464,6 +464,18 @@ function blockHeadingLevel(block) {
   return Math.min(6, Math.max(2, Number(block?.level) || 3));
 }
 
+function readerHeadingText(block) {
+  return plainTextFromRuns(block?.runs, block?.text);
+}
+
+function isReaderHeadingBlock(block) {
+  if (block?.type !== "heading") return false;
+  const title = readerHeadingText(block);
+  if (!title) return false;
+  if (title.length > 60) return false;
+  return !/[。！？；：，,.!?;:]/.test(title);
+}
+
 function chapterBlocks(chapter) {
   return chapter.blocks || (chapter.paragraphs || []).map((text) => ({ type: "paragraph", text }));
 }
@@ -471,7 +483,7 @@ function chapterBlocks(chapter) {
 function headingControlsContent(blocks, blockIndex, level) {
   for (let index = blockIndex + 1; index < blocks.length; index += 1) {
     const block = blocks[index];
-    if (block?.type === "heading" && blockHeadingLevel(block) <= level) return false;
+    if (isReaderHeadingBlock(block) && blockHeadingLevel(block) <= level) return false;
     return true;
   }
   return false;
@@ -483,14 +495,14 @@ function expandReaderHeadingPath(chapter, chapterIndex, headingId) {
   expandedTocChapters.add(readerChapterTocId(chapterIndex));
   const blocks = chapterBlocks(chapter);
   const targetIndex = blocks.findIndex((block, blockIndex) =>
-    block?.type === "heading" && readerHeadingId(chapterIndex, blockIndex) === headingId
+    isReaderHeadingBlock(block) && readerHeadingId(chapterIndex, blockIndex) === headingId
   );
   if (targetIndex < 0) return;
 
   let level = blockHeadingLevel(blocks[targetIndex]);
   for (let index = targetIndex - 1; index >= 0; index -= 1) {
     const block = blocks[index];
-    if (block?.type !== "heading") continue;
+    if (!isReaderHeadingBlock(block)) continue;
     const candidateLevel = blockHeadingLevel(block);
     if (candidateLevel >= level) continue;
     expandedReaderHeadings.add(readerHeadingId(chapterIndex, index));
@@ -520,8 +532,8 @@ function readerTocItems(book) {
       });
     }
     chapterBlocks(chapter).forEach((block, blockIndex) => {
-      if (block.type !== "heading") return;
-      const title = plainTextFromRuns(block.runs, block.text);
+      if (!isReaderHeadingBlock(block)) return;
+      const title = readerHeadingText(block);
       if (!title) return;
       items.push({
         type: "heading",
@@ -607,7 +619,7 @@ function renderChapterBlocks(chapter, chapterIndex = currentChapter) {
       const tag = block.ordered ? "ol" : "ul";
       return `<${tag}${alignment}>${(block.items || []).map((item) => `<li>${renderRichRuns(item.runs, item.text)}</li>`).join("")}</${tag}>`;
     }
-    if (block.type === "heading") {
+    if (isReaderHeadingBlock(block)) {
       const hLevel = blockHeadingLevel(block);
       const levelClass = hLevel >= 5 ? "chapter-minor-heading" : "chapter-subheading";
       const headingId = readerHeadingId(chapterIndex, blockIndex);
